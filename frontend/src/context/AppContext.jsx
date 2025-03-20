@@ -10,7 +10,7 @@ const AppContextProvider = (props) => {
     doctors,
     currencySymbol,
   };
-  // Value test
+  // Value test frontend comment
 
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
