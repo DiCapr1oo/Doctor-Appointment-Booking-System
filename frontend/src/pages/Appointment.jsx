@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Appointment = () => {
   const { docId } = useParams();
-  const { doctors, currencySymbol, backendUrl, token, getDoctorData } =
+  const { doctors, currencySymbol, backendUrl, token, getDoctorsData } =
     useContext(AppContext);
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -101,7 +101,7 @@ const Appointment = () => {
       );
       if (data.success) {
         toast.success(data.message);
-        getDoctorData();
+        getDoctorsData();
         navigate("/my-appointments");
       } else {
         toast.error(data.message);
