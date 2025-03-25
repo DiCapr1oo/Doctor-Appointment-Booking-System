@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 const MyAppointments = () => {
   const { backendUrl, token, getDoctorsData } = useContext(AppContext);
 
   const [appointments, setAppointments] = useState([]);
+  const [paypalReady, setPaypalReady] = useState(false);
   const months = [
     "",
     "Jan",
@@ -66,6 +69,15 @@ const MyAppointments = () => {
   };
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.src = `https://www.paypal.com/sdk/js?client-id=${
+      import.meta.env.VITE_PAYPAL_CLIENT_ID
+    }&currency=USD`;
+    script.addEventListener("load", () => setPaypalReady(true));
+    document.body.appendChild(script);
+  }, []);
+
+  useEffect(() => {
     if (token) {
       getUserAppointments();
     }
@@ -106,12 +118,92 @@ const MyAppointments = () => {
             </div>
             <div></div>
             <div className="flex flex-col gap-2 justify-end">
-              {!item.cancelled && (
-                <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300">
-                  Pay Online
+              {!item.cancelled && item.payment && (
+                <button className="sm:min-w-48 py-2 border rounded text-stone-500 bg-indigo-50">
+                  Paid
                 </button>
               )}
-              {!item.cancelled && (
+              {!item.cancelled && !item.payment && (
+                <div className="w-full">
+                  {paypalReady ? (
+                    <PayPalScriptProvider
+                      options={{
+                        "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
+                        currency: "USD",
+                        components: "buttons",
+                      }}
+                    >
+                      <PayPalButtons
+                        style={{
+                          layout: "vertical",
+                          color: "gold",
+                          shape: "rect",
+                          label: "paypal",
+                        }}
+                        createOrder={(data, actions) => {
+                          return fetch(
+                            `${backendUrl}/api/payment/create-payment`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                                token: token,
+                              },
+                              body: JSON.stringify({
+                                appointmentId: item._id,
+                                amount: item.amount,
+                              }),
+                            }
+                          )
+                            .then((res) => res.json())
+                            .then((order) => order.id);
+                        }}
+                        onApprove={(data, actions) => {
+                          return fetch(
+                            `${backendUrl}/api/payment/capture-payment`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                                token: token,
+                              },
+                              body: JSON.stringify({
+                                orderID: data.orderID,
+                                appointmentId: item._id,
+                              }),
+                            }
+                          )
+                            .then((res) => {
+                              if (!res.ok)
+                                throw new Error("Payment capture failed");
+                              return res.json();
+                            })
+                            .then(() => {
+                              toast.success("Payment completed successfully!");
+                              getUserAppointments();
+                            })
+                            .catch((error) => {
+                              toast.error("Payment verification failed");
+                              console.error("Capture Error:", error);
+                            });
+                        }}
+                        onError={(err) => {
+                          toast.error("Payment failed: " + err.message);
+                          console.error("PayPal Error:", err);
+                        }}
+                      />
+                    </PayPalScriptProvider>
+                  ) : (
+                    <button
+                      disabled
+                      className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded"
+                    >
+                      Loading PayPal...
+                    </button>
+                  )}
+                </div>
+              )}
+              {!item.cancelled && !item.payment && (
                 <button
                   onClick={() => cancelAppointment(item._id)}
                   className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red hover:text-white hover:bg-red-500 transition-all duration-300"
@@ -119,7 +211,7 @@ const MyAppointments = () => {
                   Cancel Appointment
                 </button>
               )}
-              {item.cancelled && (
+              {item.cancelled && !item.payment && (
                 <button className="text-sm text-red-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red  border-red-500">
                   Appointment Cancelled
                 </button>

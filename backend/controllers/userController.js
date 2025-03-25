@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
+import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
+
 //API to register user
 const registerUser = async (req, res) => {
   try {
@@ -220,6 +222,8 @@ const cancelAppointment = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+///API to make payment of appointment using paypal
 
 export {
   registerUser,
