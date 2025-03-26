@@ -34,14 +34,21 @@ const Appointment = () => {
       currentDate.setDate(today.getDate() + i);
 
       let endTime = new Date(currentDate);
-      endTime.setHours(21, 0, 0, 0); // Đặt endTime chính xác
+      endTime.setHours(21, 0, 0, 0); // Kết thúc lúc 9 giờ tối
 
       if (i === 0) {
         // Nếu là hôm nay
         currentDate.setHours(today.getHours());
         currentDate.setMinutes(Math.ceil(today.getMinutes() / 30) * 30);
+
+        // Nếu hiện tại trước 8h sáng, đặt thành 8h
+        if (currentDate.getHours() < 8) {
+          currentDate.setHours(8);
+          currentDate.setMinutes(0);
+        }
       } else {
-        currentDate.setHours(10);
+        // Các ngày khác bắt đầu từ 8h sáng
+        currentDate.setHours(8);
         currentDate.setMinutes(0);
       }
 
