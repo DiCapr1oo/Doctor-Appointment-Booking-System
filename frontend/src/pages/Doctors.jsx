@@ -6,25 +6,49 @@ const Doctors = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
   const [showFilter, setShowFilter] = useState(true);
+  const [sortByExperience, setSortByExperience] = useState(""); // "asc" or "desc"
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const { doctors } = useContext(AppContext);
 
   const applyFilter = () => {
+    let filtered = [...doctors];
+
+    // Filter by speciality
     if (speciality) {
-      setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
-    } else {
-      setFilterDoc(doctors);
+      filtered = filtered.filter((doc) => doc.speciality === speciality);
     }
+
+    // Filter by search term (name)
+    if (searchTerm) {
+      filtered = filtered.filter((doc) =>
+        doc.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Sort by experience
+    if (sortByExperience === "asc") {
+      filtered.sort((a, b) => parseInt(a.experience) - parseInt(b.experience));
+    } else if (sortByExperience === "desc") {
+      filtered.sort((a, b) => parseInt(b.experience) - parseInt(a.experience));
+    }
+
+    setFilterDoc(filtered);
   };
 
   useEffect(() => {
     applyFilter();
-  }, [doctors, speciality]);
+  }, [doctors, speciality, sortByExperience, searchTerm]);
+
+  const toggleExperienceSort = (type) => {
+    setSortByExperience((prev) => (prev === type ? "" : type));
+  };
 
   return (
     <div>
       <p className="text-gray-600">Browser through the doctors specialist.</p>
+
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
         <button
           className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${
@@ -34,11 +58,25 @@ const Doctors = () => {
         >
           Filters
         </button>
+
         <div
           className={`flex-col gap-4 text-gray-600 ${
             showFilter ? "flex" : "hidden"
           }`}
         >
+          {/* Search Bar */}
+          <p className="font-medium">Search Doctor's Name</p>
+          <div className=" mb-4">
+            <input
+              type="text"
+              placeholder="Search by doctor name..."
+              className="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <p className="font-medium">Speciality</p>
           <p
             onClick={() =>
               speciality === "General physician"
@@ -115,6 +153,27 @@ const Doctors = () => {
           >
             Gastroenterologist
           </p>
+
+          {/* Experience filter section */}
+          <p className="font-medium mt-4">Experience</p>
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={() => toggleExperienceSort("asc")}
+              className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer text-left ${
+                sortByExperience === "asc" ? "bg-indigo-100 text-black" : ""
+              }`}
+            >
+              Low to High
+            </button>
+            <button
+              onClick={() => toggleExperienceSort("desc")}
+              className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer text-left ${
+                sortByExperience === "desc" ? "bg-indigo-100 text-black" : ""
+              }`}
+            >
+              High to Low
+            </button>
+          </div>
         </div>
         <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
           {filterDoc.map((item, index) => (
@@ -141,6 +200,9 @@ const Doctors = () => {
                 </div>
                 <p className="text-gray-900 text-lg font-medium">{item.name}</p>
                 <p className="text-gray-600 text-sm">{item.speciality}</p>
+                <button className="py-0.5 px-2 border text-xs rounded-full">
+                  {item.experience}
+                </button>
               </div>
             </div>
           ))}

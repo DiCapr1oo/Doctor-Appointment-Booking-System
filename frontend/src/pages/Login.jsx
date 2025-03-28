@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Login = () => {
-  const { backendUrl, token, setToken } = useContext(AppContext);
+  const { backendUrl, token, setToken, setUserData } = useContext(AppContext);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const formType = searchParams.get("type") || "signup"; // Mặc định là signup
@@ -25,6 +25,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
+          setUserData(data.user); // Lưu thông tin user
         } else {
           toast.error(data.message);
         }
@@ -37,6 +38,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
+          setUserData(data.user); // Lưu thông tin user
         } else {
           toast.error(data.message);
         }

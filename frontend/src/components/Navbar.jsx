@@ -5,12 +5,14 @@ import { AppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { token, setToken, userData } = useContext(AppContext);
+  const { token, setToken, userData, setUserData } = useContext(AppContext); // Thêm setUserData
   const [showMenu, setShowMenu] = useState(false);
 
   const logout = () => {
-    setToken(false);
+    setToken(null); // Đổi từ false sang null để rõ ràng hơn
+    setUserData(null); // Clear user data
     localStorage.removeItem("token");
+    navigate("/"); // Redirect về trang chủ
   };
 
   return (
