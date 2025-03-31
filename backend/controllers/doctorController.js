@@ -1,5 +1,5 @@
 import doctorModel from "../models/doctorModel.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
 
@@ -66,7 +66,6 @@ const appointmentsDoctor = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 //API to mark appointment completed for doctor panel
 const appointmentsCompleted = async (req, res) => {
   try {
@@ -87,7 +86,6 @@ const appointmentsCompleted = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 ///API to cancel appointment for doctor panel
 const appointmentsCancel = async (req, res) => {
   try {
@@ -108,7 +106,6 @@ const appointmentsCancel = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 //API to get dashboard data for doctor panel
 const doctorDashboard = async (req, res) => {
   try {
@@ -145,7 +142,6 @@ const doctorDashboard = async (req, res) => {
 };
 
 //API to get doctor profile for doctor panel
-
 const doctorProfile = async (req, res) => {
   try {
     const { docId } = req.body;
@@ -156,7 +152,6 @@ const doctorProfile = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 //API to update doctor profile data from Doctor Panel
 const updateDoctorProfile = async (req, res) => {
   try {

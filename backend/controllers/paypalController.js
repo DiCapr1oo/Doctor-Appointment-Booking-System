@@ -35,7 +35,6 @@ const createPayment = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
 const capturePayment = async (req, res) => {
   try {
     const { orderID, appointmentId } = req.body;
@@ -62,7 +61,7 @@ const capturePayment = async (req, res) => {
     });
   } catch (error) {
     console.error("PayPal Capture Error:", error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Payment failed" });
   }
 };
 

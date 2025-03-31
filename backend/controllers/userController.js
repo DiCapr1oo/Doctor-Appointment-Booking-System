@@ -1,5 +1,5 @@
 import validator from "validator";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
+///API to login user
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -170,10 +170,9 @@ const bookAppointment = async (req, res) => {
     res.json({ success: true, message: "Appointment Booked " });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.json({ success: false, message: "Booking Failed" });
   }
 };
-
 //API to get user appointments for frontend my-appointments page
 const listAppointment = async (req, res) => {
   try {
@@ -186,7 +185,6 @@ const listAppointment = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 //API to cancel appointment
 const cancelAppointment = async (req, res) => {
   try {
