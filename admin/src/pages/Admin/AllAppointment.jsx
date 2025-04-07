@@ -58,7 +58,7 @@ const AllAppointment = () => {
               <p>{item.docData.name}</p>
             </div>
             <p>
-              {item.amount}
+              {(item.amount * 1000).toLocaleString("vi-VN")}
               {currency}
             </p>
             {item.cancelled ? (

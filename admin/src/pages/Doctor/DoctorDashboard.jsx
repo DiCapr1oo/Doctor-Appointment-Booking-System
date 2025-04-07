@@ -27,8 +27,7 @@ const DoctorDashboard = () => {
             <img className="w-14" src={assets.earning_icon} alt="" />
             <div>
               <p className="text-xl font-semibold text-gray-600">
-                {dashData.earnings}
-                {currency}
+                {(dashData.earnings * 1000).toLocaleString("vi-VN")} {currency}
               </p>
               <p className="text-gray-400">Thu nhập</p>
             </div>

@@ -103,7 +103,7 @@ const DoctorProfile = () => {
                   value={profileData.fees}
                 />
               ) : (
-                profileData.fees
+                `${(profileData.fees * 1000).toLocaleString("vi-VN")}`
               )}
               {currency}
             </div>

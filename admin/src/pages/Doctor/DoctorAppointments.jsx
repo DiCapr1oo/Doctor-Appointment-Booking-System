@@ -58,7 +58,7 @@ const DoctorAppointments = () => {
               {slotDateFormat(item.slotDate)}, {item.slotTime}
             </p>
             <p>
-              {item.amount}
+              {(item.amount * 1000).toLocaleString("vi-VN")}
               {currency}
             </p>
             {item.cancelled ? (

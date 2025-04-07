@@ -170,7 +170,7 @@ const Appointment = () => {
             <p className="text-gray-500 font-medium mt-4">
               Phí khám:{" "}
               <span className="text-gray-600">
-                {docInfo.fees}
+                {(docInfo.fees * 1000).toLocaleString("vi-VN")}
                 {currencySymbol}
               </span>
             </p>
