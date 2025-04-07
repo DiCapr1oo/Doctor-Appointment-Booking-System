@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const appointmentSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   docId: { type: String, required: true },
@@ -13,9 +12,7 @@ const appointmentSchema = new mongoose.Schema({
   payment: { type: Boolean, default: false },
   isCompleted: { type: Boolean, default: false },
 });
-
 const appointmentModel =
   mongoose.models.appointment ||
   mongoose.model("appointment", appointmentSchema);
-
 export default appointmentModel;

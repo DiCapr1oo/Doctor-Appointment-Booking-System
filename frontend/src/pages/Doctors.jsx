@@ -65,7 +65,7 @@ const Doctors = () => {
           }`}
         >
           {/* Search Bar */}
-          <p className="font-medium">Search Doctor's Name</p>
+          <p className="font-medium">Tìm kiếm theo tên Bác sĩ</p>
           <div className=" mb-4">
             <input
               type="text"
@@ -76,7 +76,7 @@ const Doctors = () => {
             />
           </div>
 
-          <p className="font-medium">Speciality</p>
+          <p className="font-medium">Chuyên ngành</p>
           <p
             onClick={() =>
               speciality === "General physician"
