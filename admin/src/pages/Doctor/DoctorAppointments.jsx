@@ -26,12 +26,12 @@ const DoctorAppointments = () => {
       <div className="bg-white border rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
         <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b">
           <p>#</p>
-          <p>Patient</p>
-          <p>Payment</p>
-          <p>Age</p>
-          <p>Date & Time</p>
-          <p>Fees</p>
-          <p className="text-center">Action</p>
+          <p>Bệnh nhân</p>
+          <p>Thanh toán</p>
+          <p>Tuổi</p>
+          <p>Thời gian</p>
+          <p>Phí khám</p>
+          <p className="text-center">Thao tác</p>
         </div>
 
         {appointments.reverse().map((item, index) => (
@@ -58,16 +58,16 @@ const DoctorAppointments = () => {
               {slotDateFormat(item.slotDate)}, {item.slotTime}
             </p>
             <p>
-              {currency}
               {item.amount}
+              {currency}
             </p>
             {item.cancelled ? (
               <p className="text-red-500 text-xs font-medium text-center">
-                Cancelled
+                Đã Hủy
               </p>
             ) : item.isCompleted ? (
               <p className="text-green-500 text-xs font-medium text-center">
-                Completed
+                Hoàn Thành
               </p>
             ) : (
               <div className="flex justify-center">

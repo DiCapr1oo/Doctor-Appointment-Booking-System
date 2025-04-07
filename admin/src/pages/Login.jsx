@@ -49,7 +49,7 @@ const login = () => {
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg">
         <p className="text-2xl font-semibold m-auto">
-          <span className="text-primary"> {state} </span> Login
+          <span className="text-primary"> {state} </span> Đăng Nhập
         </p>
         <div className="w-full">
           <p>Email</p>
@@ -62,7 +62,7 @@ const login = () => {
           />
         </div>
         <div className="w-full">
-          <p className="w-full">Password</p>
+          <p className="w-full">Mật khẩu</p>
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
@@ -76,22 +76,22 @@ const login = () => {
         </button>
         {state === "Admin" ? (
           <p>
-            Doctor Login?{" "}
+            Bác sĩ đăng nhập?{" "}
             <span
               onClick={() => setState("Doctor")}
               className="text-primary underline cursor-pointer"
             >
-              Click here
+              Tại đây
             </span>
           </p>
         ) : (
           <p>
-            Admin Login?{" "}
+            Admin đăng nhập?{" "}
             <span
               onClick={() => setState("Admin")}
               className="text-primary underline cursor-pointer"
             >
-              Click here
+              Tại đây
             </span>
           </p>
         )}

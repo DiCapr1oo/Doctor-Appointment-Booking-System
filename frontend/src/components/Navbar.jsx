@@ -25,19 +25,19 @@ const Navbar = () => {
       />
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to="/">
-          <li className="py-1">HOME</li>
+          <li className="py-1">Trang Chủ</li>
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/doctors">
-          <li className="py-1">ALL DOCTORS</li>
+          <li className="py-1">Đội Ngũ Bác Sĩ</li>
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/about">
-          <li className="py-1">ABOUT</li>
+          <li className="py-1">Về Chúng Tôi</li>
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/contact">
-          <li className="py-1">CONTACT</li>
+          <li className="py-1">Liên Hệ</li>
           <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
         </NavLink>
       </ul>
@@ -59,16 +59,16 @@ const Navbar = () => {
                   onClick={() => navigate("my-profile")}
                   className="hover:text-black cursor-pointer"
                 >
-                  My Profile
+                  Hồ Sơ Cá Nhân
                 </p>
                 <p
                   onClick={() => navigate("my-appointments")}
                   className="hover:text-black cursor-pointer"
                 >
-                  My Appointments
+                  Cuộc Hẹn Của Tôi
                 </p>
                 <p onClick={logout} className="hover:text-black cursor-pointer">
-                  Logout
+                  Đăng Xuất
                 </p>
               </div>
             </div>
@@ -79,13 +79,13 @@ const Navbar = () => {
               onClick={() => navigate("/login?type=login")}
               className="border border-primary text-primary px-6 py-2 rounded-full font-medium hover:bg-primary hover:text-white transition-colors"
             >
-              Login
+              Đăng Nhập
             </button>
             <button
               onClick={() => navigate("/login?type=signup")}
               className="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-primary-dark transition-colors"
             >
-              Create Account
+              Tạo Tài Khoản
             </button>
           </div>
         )}
@@ -112,16 +112,16 @@ const Navbar = () => {
           </div>
           <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium">
             <NavLink onClick={() => setShowMenu(false)} to="/">
-              <p className="px-4 py-2 rounded inline-block">HOME</p>
+              <p className="px-4 py-2 rounded inline-block">Trang Chủ</p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to="/doctors">
-              <p className="px-4 py-2 rounded inline-block">ALL DOCTORS</p>
+              <p className="px-4 py-2 rounded inline-block">Đội Ngũ Bác Sĩ</p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to="/about">
-              <p className="px-4 py-2 rounded inline-block">ABOUT</p>
+              <p className="px-4 py-2 rounded inline-block">Về Chúng Tôi</p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to="/contact">
-              <p className="px-4 py-2 rounded inline-block">CONTACT</p>
+              <p className="px-4 py-2 rounded inline-block">Liên Hệ</p>
             </NavLink>
             <div className="flex flex-col gap-2 w-full mt-4">
               <button
@@ -131,7 +131,7 @@ const Navbar = () => {
                 }}
                 className="w-full border border-primary text-primary px-4 py-2 rounded-full font-medium hover:bg-primary hover:text-white transition-colors"
               >
-                Login
+                Đăng Nhập
               </button>
               <button
                 onClick={() => {
@@ -140,7 +140,7 @@ const Navbar = () => {
                 }}
                 className="w-full bg-primary text-white px-4 py-2 rounded-full font-medium hover:bg-primary-dark transition-colors"
               >
-                Create Account
+                Tạo Tài Khoản
               </button>
             </div>
           </ul>

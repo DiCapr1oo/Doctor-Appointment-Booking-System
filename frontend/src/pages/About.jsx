@@ -6,7 +6,7 @@ function About() {
     <div>
       <div className="text-center text-2xl pt-10 text-gray-500">
         <p>
-          ABOUT <span className="text-gray-700 font-medium">US</span>
+          Về <span className="text-gray-700 font-medium">Chúng Tôi</span>
         </p>
       </div>
 
@@ -18,55 +18,55 @@ function About() {
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600">
           <p>
-            Welcome to Prescripto, your trusted partner in managing your
-            healthcare needs conveniently and efficiently. At Prescripto, we
-            understand the challenges individuals face when it comes to
-            scheduling doctor appointments and managing their health records.
+            Chào mừng đến với Prescripto, đối tác đáng tin cậy của bạn trong
+            việc quản lý nhu cầu chăm sóc sức khỏe của bạn một cách thuận tiện
+            và hiệu quả. Tại Prescripto, chúng tôi hiểu những thách thức mà mọi
+            người phải đối mặt khi lên lịch hẹn khám bác sĩ và quản lý hồ sơ sức
+            khỏe của họ.
           </p>
           <p>
-            Prescripto is committed to excellence in healthcare technology. We
-            continuously strive to enhance our platform, integrating the latest
-            advancements to improve user experience and deliver superior
-            service. Whether you're booking your first appointment or managing
-            ongoing care, Prescripto is here to support you every step of the
-            way.
+            Prescripto cam kết mang đến sự xuất sắc trong công nghệ chăm sóc sức
+            khỏe. Chúng tôi liên tục nỗ lực cải thiện nền tảng của mình, tích
+            hợp những tiến bộ mới nhất để cải thiện trải nghiệm của người dùng
+            và cung cấp dịch vụ vượt trội. Cho dù bạn đang đặt lịch hẹn đầu tiên
+            hay quản lý việc chăm sóc liên tục, Prescripto luôn ở đây để hỗ trợ
+            bạn trong từng bước.
           </p>
-          <b className="text-gray-800">Our Vision</b>
+          <b className="text-gray-800">Tầm Nhìn Của Chúng Tôi</b>
           <p>
-            Our vision at Prescripto is to create a seamless healthcare
-            experience for every user. We aim to bridge the gap between patients
-            and healthcare providers, making it easier for you to access the
-            care you need, when you need it.
+            Tầm nhìn của chúng tôi tại Prescripto là tạo ra trải nghiệm chăm sóc
+            sức khỏe liền mạch cho mọi người dùng. Chúng tôi hướng đến mục tiêu
+            thu hẹp khoảng cách giữa bệnh nhân và nhà cung cấp dịch vụ chăm sóc
+            sức khỏe, giúp bạn dễ dàng tiếp cận dịch vụ chăm sóc bạn cần, khi
+            bạn cần.
           </p>
         </div>
       </div>
 
       <div className="text-xl my-4">
         <p>
-          WHY <span className="text-gray-700 font-semibold">CHOOSE US</span>
+          Tại Sao Bạn Nên Lựa Chọn{" "}
+          <span className="text-gray-700 font-semibold">Prescipto</span>
         </p>
       </div>
 
       <div className="flex flex-col md:flex-row mb-20">
         <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary transition-all duration-300 text-gray-600 cursor-pointer hover:text-white">
-          <b>EFFICIENCY:</b>
+          <b>HIỆU QUẢ:</b>
+          <p>Lịch hẹn hợp lý phù hợp với lối sống bận rộn của bạn.</p>
+        </div>
+        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary transition-all duration-300 text-gray-600 cursor-pointer hover:text-white">
+          <b>SỰ TIỆN LỢI::</b>
           <p>
-            Streamlined appointment scheduling that fits into your busy
-            lifestyle.
+            Tiếp cận mạng lưới các chuyên gia chăm sóc sức khỏe đáng tin cậy tại
+            khu vực của bạn.
           </p>
         </div>
         <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary transition-all duration-300 text-gray-600 cursor-pointer hover:text-white">
-          <b>CONVENIENCE:</b>
+          <b>CÁ NHÂN HÓA:</b>
           <p>
-            Access to a network of trusted healthcare professionals in your
-            area.
-          </p>
-        </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary transition-all duration-300 text-gray-600 cursor-pointer hover:text-white">
-          <b>PERSONALIZATION:</b>
-          <p>
-            Tailored recommendations and reminders to help you stay on top of
-            your health.
+            Các khuyến nghị và lời nhắc nhở phù hợp giúp bạn luôn kiểm soát được
+            sức khỏe của mình.
           </p>
         </div>
       </div>

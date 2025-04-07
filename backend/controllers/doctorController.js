@@ -12,7 +12,7 @@ const changeAvailability = async (req, res) => {
       available: !docData.available,
     });
 
-    res.json({ success: true, message: "Availability Changed" });
+    res.json({ success: true, message: "Trạng Thái Đã Thay Đổi" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -37,7 +37,10 @@ const loginDoctor = async (req, res) => {
     const doctor = await doctorModel.findOne({ email });
 
     if (!doctor) {
-      return res.json({ success: false, message: "Invalid credentials" });
+      return res.json({
+        success: false,
+        message: "Thông Tin Không Hợp Lệ",
+      });
     }
 
     const isMatch = await bcrypt.compare(password, doctor.password);
@@ -46,7 +49,7 @@ const loginDoctor = async (req, res) => {
       const token = jwt.sign({ id: doctor._id }, process.env.JWT_SECRET);
       res.json({ success: true, token });
     } else {
-      res.json({ success: false, message: "Invalid credentials" });
+      res.json({ success: false, message: "Thông Tin Không Hợp Lệ" });
     }
   } catch (error) {
     console.log(error);
@@ -66,7 +69,7 @@ const appointmentsDoctor = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-//API to mark appointment completed for doctor panel
+//API to mark Cuộc Hẹn Đã Hoàn Thành for doctor panel
 const appointmentsCompleted = async (req, res) => {
   try {
     const { docId, appointmentId } = req.body;
@@ -77,7 +80,7 @@ const appointmentsCompleted = async (req, res) => {
       await appointmentModel.findByIdAndUpdate(appointmentId, {
         isCompleted: true,
       });
-      return res.json({ success: true, message: "Appointment Completed" });
+      return res.json({ success: true, message: "Cuộc Hẹn Đã Hoàn Thành" });
     } else {
       return res.json({ success: false, message: "Mark Failed" });
     }
@@ -97,9 +100,9 @@ const appointmentsCancel = async (req, res) => {
       await appointmentModel.findByIdAndUpdate(appointmentId, {
         cancelled: true,
       });
-      return res.json({ success: true, message: "Appointment Cancelled" });
+      return res.json({ success: true, message: "Cuộc Hẹn Đã Bị Hủy" });
     } else {
-      return res.json({ success: false, message: "Cancellation Failed" });
+      return res.json({ success: false, message: "Thao Tác Hủy Thất Bại" });
     }
   } catch (error) {
     console.log(error);
@@ -158,7 +161,7 @@ const updateDoctorProfile = async (req, res) => {
     const { docId, fees, address, available } = req.body;
     await doctorModel.findByIdAndUpdate(docId, { fees, address, available });
 
-    res.json({ success: true, message: "Profile Updated" });
+    res.json({ success: true, message: "Hồ Sơ Đã Được Cập Nhật" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });

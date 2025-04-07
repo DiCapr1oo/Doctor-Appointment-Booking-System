@@ -20,7 +20,7 @@ const Sidebar = () => {
             to={"/admin-dashboard"}
           >
             <img src={assets.home_icon} alt="" />
-            <p className="hidden md:block">Dashboard</p>
+            <p className="hidden md:block">Trang Chủ</p>
           </NavLink>
 
           <NavLink
@@ -32,7 +32,7 @@ const Sidebar = () => {
             to={"/all-appointment"}
           >
             <img src={assets.appointment_icon} alt="" />
-            <p className="hidden md:block">Appointments</p>
+            <p className="hidden md:block">Các Cuộc Hẹn</p>
           </NavLink>
 
           <NavLink
@@ -44,7 +44,7 @@ const Sidebar = () => {
             to={"/add-doctor"}
           >
             <img src={assets.add_icon} alt="" />
-            <p className="hidden md:block">Add Doctor</p>
+            <p className="hidden md:block">Thêm Bác Sĩ</p>
           </NavLink>
 
           <NavLink
@@ -56,7 +56,7 @@ const Sidebar = () => {
             to={"/doctor-list"}
           >
             <img src={assets.people_icon} alt="" />
-            <p className="hidden md:block">Doctors List</p>
+            <p className="hidden md:block">Danh Sách Bác Sĩ</p>
           </NavLink>
         </ul>
       )}
@@ -72,7 +72,7 @@ const Sidebar = () => {
             to={"/doctor-dashboard"}
           >
             <img src={assets.home_icon} alt="" />
-            <p className="hidden md:block">Dashboard</p>
+            <p className="hidden md:block">Trang Chủ</p>
           </NavLink>
 
           <NavLink
@@ -84,7 +84,7 @@ const Sidebar = () => {
             to={"/doctor-appointments"}
           >
             <img src={assets.appointment_icon} alt="" />
-            <p className="hidden md:block">Appointments</p>
+            <p className="hidden md:block">Các Cuộc Hẹn</p>
           </NavLink>
 
           <NavLink
@@ -96,7 +96,7 @@ const Sidebar = () => {
             to={"/doctor-profile"}
           >
             <img src={assets.people_icon} alt="" />
-            <p className="hidden md:block">Profile</p>
+            <p className="hidden md:block">Hồ Sơ Cá Nhân</p>
           </NavLink>
         </ul>
       )}

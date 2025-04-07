@@ -86,7 +86,7 @@ const MyAppointments = () => {
   return (
     <div>
       <p className="pb-3 mt12 font-medium text-zinc-700 border-b">
-        My Appointments
+        Cuộc Hẹn Của Tôi
       </p>
       <div>
         {appointments.map((item, index) => (
@@ -106,12 +106,12 @@ const MyAppointments = () => {
                 {item.docData.name}
               </p>
               <p>{item.speciality}</p>
-              <p className="text-zinc-700 font-medium mt-1">Address:</p>
+              <p className="text-zinc-700 font-medium mt-1">Địa điểm:</p>
               <p className="text-xs">{item.docData.address.line1}</p>
               <p className="text-xs">{item.docData.address.line2}</p>
               <p className="text-xs mt-1">
                 <span className="text-sm text-neutral-700 font-medium">
-                  Date & Time:
+                  Thời gian:
                 </span>{" "}
                 {slotDateFormat(item.slotDate)} | {item.slotTime}
               </p>
@@ -120,7 +120,7 @@ const MyAppointments = () => {
             <div className="flex flex-col gap-2 justify-end">
               {!item.cancelled && item.payment && !item.isCompleted && (
                 <button className="sm:min-w-48 py-2 border rounded text-stone-500 bg-indigo-50">
-                  Paid
+                  Đã Thanh Toán
                 </button>
               )}
               {!item.cancelled && !item.payment && !item.isCompleted && (
@@ -179,7 +179,7 @@ const MyAppointments = () => {
                               return res.json();
                             })
                             .then(() => {
-                              toast.success("Payment completed successfully!");
+                              toast.success("Thanh Toán Thành Công");
                               getUserAppointments();
                             })
                             .catch((error) => {
@@ -208,17 +208,17 @@ const MyAppointments = () => {
                   onClick={() => cancelAppointment(item._id)}
                   className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red hover:text-white hover:bg-red-500 transition-all duration-300"
                 >
-                  Cancel Appointment
+                  Hủy Cuộc Hẹn
                 </button>
               )}
               {item.cancelled && !item.isCompleted && (
                 <button className="text-sm text-red-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red  border-red-500">
-                  Appointment Cancelled
+                  Cuộc Hẹn Đã Bị Hủy
                 </button>
               )}
               {item.isCompleted && (
                 <button className="sm:min-w-48 py-2 border border-green-500 rounded text-green-500">
-                  Completed
+                  Hoàn Thành
                 </button>
               )}
             </div>

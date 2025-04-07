@@ -58,16 +58,16 @@ const Login = () => {
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
         <p className="text-2xl font-semibold">
-          {formType === "signup" ? "Create Account" : "Login"}
+          {formType === "signup" ? "Tạo Tài Khoản" : "Đăng Nhập"}
         </p>
         <p>
-          Please {formType === "signup" ? "sign up" : "login"} to book
-          appointment
+          Hãy {formType === "signup" ? "tạo tài khoản" : "đăng nhập"} để đăng ký
+          lịch hẹn.
         </p>
 
         {formType === "signup" && (
           <div className="w-full">
-            <p>Full Name</p>
+            <p>Họ & Tên</p>
             <input
               className="border border-zinc-300 rounded w-full p-2 mt-1 focus:outline-none focus:border-primary"
               type="text"
@@ -90,7 +90,7 @@ const Login = () => {
         </div>
 
         <div className="w-full">
-          <p>Password</p>
+          <p>Mật Khẩu</p>
           <input
             className="border border-zinc-300 rounded w-full p-2 mt-1 focus:outline-none focus:border-primary"
             type="password"
@@ -109,22 +109,22 @@ const Login = () => {
 
         {formType === "signup" ? (
           <p>
-            Already have an account?{" "}
+            Đã có tài khoản?{" "}
             <span
               onClick={() => navigate("/login?type=login")}
               className="text-primary underline cursor-pointer"
             >
-              Login here
+              Đăng nhập tại đây
             </span>
           </p>
         ) : (
           <p>
-            Don't have an account?{" "}
+            Chưa có tài khoản?{" "}
             <span
               onClick={() => navigate("/login?type=signup")}
               className="text-primary underline cursor-pointer"
             >
-              Create Account
+              Tạo tài khoản
             </span>
           </p>
         )}

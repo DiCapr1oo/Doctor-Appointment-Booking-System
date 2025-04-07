@@ -20,7 +20,7 @@ const DoctorList = () => {
   return (
     <div className="m-5 max-h-[90vh] overflow-y-scroll">
       <div className="flex justify-between items-center">
-        <h1 className="text-lg font-medium">All Doctors</h1>
+        <h1 className="text-lg font-medium">Danh Sách Bác Sĩ</h1>
 
         {/* Search button for small screens */}
         <button
@@ -35,7 +35,7 @@ const DoctorList = () => {
       <div className={`${showSearch ? "block" : "hidden"} sm:block my-4`}>
         <input
           type="text"
-          placeholder="Search by doctor name..."
+          placeholder="Tìm kiếm theo tên..."
           className="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -64,7 +64,7 @@ const DoctorList = () => {
                   type="checkbox"
                   checked={item.available}
                 />
-                <p>Available</p>
+                <p>Nhận cuộc hẹn</p>
               </div>
             </div>
           </div>

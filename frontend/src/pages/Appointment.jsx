@@ -168,10 +168,10 @@ const Appointment = () => {
               </p>
             </div>
             <p className="text-gray-500 font-medium mt-4">
-              Appointment Fee:{" "}
+              Phí khám:{" "}
               <span className="text-gray-600">
-                {currencySymbol}
                 {docInfo.fees}
+                {currencySymbol}
               </span>
             </p>
           </div>
@@ -218,7 +218,7 @@ const Appointment = () => {
             onClick={bookAppointment}
             className="bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
           >
-            Book an appointment
+            Đặt Lịch
           </button>
         </div>
         {/* -----{Listing Related Doctors} ----*/}

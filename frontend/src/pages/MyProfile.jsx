@@ -103,16 +103,18 @@ const MyProfile = () => {
         {/* Contact Information  */}
         <div className="mb-6">
           <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-            Contact Information
+            Thông Tin Liên Hệ
           </h3>
           <div className="space-y-4">
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Email id</p>
+              <p className="text-xs font-medium text-gray-500 mb-1">Email</p>
               <p className="text-blue-600">{userData.email}</p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Phone</p>
+              <p className="text-xs font-medium text-gray-500 mb-1">
+                Số điện thoại
+              </p>
               {isEdit ? (
                 <input
                   className="w-full p-2 bg-gray-50 rounded border border-gray-200 focus:outline-none focus:border-primary"
@@ -128,7 +130,7 @@ const MyProfile = () => {
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Address</p>
+              <p className="text-xs font-medium text-gray-500 mb-1">Địa chỉ</p>
               {isEdit ? (
                 <div className="space-y-2">
                   <input
@@ -168,11 +170,13 @@ const MyProfile = () => {
         {/* Basic Information*/}
         <div className="mb-6">
           <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-            Basic Information
+            Thông Tin Cơ Bản
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Gender</p>
+              <p className="text-xs font-medium text-gray-500 mb-1">
+                Giới Tính
+              </p>
               {isEdit ? (
                 <select
                   className="w-full p-2 bg-gray-50 rounded border border-gray-200 focus:outline-none focus:border-primary"
@@ -189,7 +193,9 @@ const MyProfile = () => {
               )}
             </div>
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Birthday</p>
+              <p className="text-xs font-medium text-gray-500 mb-1">
+                Ngày sinh
+              </p>
               {isEdit ? (
                 <input
                   className="w-full p-2 bg-gray-50 rounded border border-gray-200 focus:outline-none focus:border-primary"
@@ -213,14 +219,14 @@ const MyProfile = () => {
               className="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
               onClick={updateUserProfileData}
             >
-              Save Information
+              Lưu Thông Tin
             </button>
           ) : (
             <button
               className="px-6 py-2 border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-colors"
               onClick={() => setIsEdit(true)}
             >
-              Edit Profile
+              Sửa Thông Tin
             </button>
           )}
         </div>

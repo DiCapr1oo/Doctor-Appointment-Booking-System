@@ -13,18 +13,18 @@ const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !password || !email) {
-      return res.json({ success: false, message: "Missing Details" });
+      return res.json({ success: false, message: "Thiếu dữ liệu" });
     }
 
     //validating email format
 
     if (!validator.isEmail(email)) {
-      return res.json({ success: false, message: "Enter a valid email" });
+      return res.json({ success: false, message: "Nhập email hợp lệ" });
     }
 
     //validating strong password
     if (password.length < 8) {
-      return res.json({ success: false, message: "Enter a strong password" });
+      return res.json({ success: false, message: "Nhập mật khẩu mạnh hơn" });
     }
 
     //hashing user password
@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.json({ success: false, message: "User does not exist" });
+      return res.json({ success: false, message: "Người dùng không tồn tại" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -64,7 +64,7 @@ const loginUser = async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res.json({ success: true, token });
     } else {
-      res.json({ success: false, message: "Invalid credentials" });
+      res.json({ success: false, message: "Thông tin không hợp lệ" });
     }
   } catch (error) {
     console.log(error);
@@ -94,7 +94,7 @@ const updateProfile = async (req, res) => {
     const imageFile = req.file;
 
     if (!name || !phone || !dob || !gender) {
-      return res.json({ success: false, message: "Data Missing" });
+      return res.json({ success: false, message: "Thiếu dữ liệu" });
     }
 
     await userModel.findByIdAndUpdate(userId, {
@@ -115,7 +115,7 @@ const updateProfile = async (req, res) => {
       await userModel.findByIdAndUpdate(userId, { image: imageURL });
     }
 
-    res.json({ success: true, message: "Profile Updated" });
+    res.json({ success: true, message: "Hồ Sơ Đã Được Cập Nhật" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -167,7 +167,7 @@ const bookAppointment = async (req, res) => {
 
     //save new slots data in docData
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
-    res.json({ success: true, message: "Appointment Booked " });
+    res.json({ success: true, message: "Cuộc Hẹn Đã Được Đặt " });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Booking Failed" });
@@ -213,7 +213,7 @@ const cancelAppointment = async (req, res) => {
 
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
 
-    res.json({ success: true, message: "Appointment Cancelled" });
+    res.json({ success: true, message: "Cuộc Hẹn Đã Bị Hủy" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });

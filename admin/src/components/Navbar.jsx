@@ -33,7 +33,7 @@ const Navbar = () => {
         onClick={logout}
         className="bg-primary text-white text-sm px-10 py-2 rounded-full"
       >
-        Logout
+        Đăng Xuất
       </button>
     </div>
   );

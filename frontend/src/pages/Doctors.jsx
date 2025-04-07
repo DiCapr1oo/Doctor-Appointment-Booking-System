@@ -47,7 +47,9 @@ const Doctors = () => {
 
   return (
     <div>
-      <p className="text-gray-600">Browser through the doctors specialist.</p>
+      <p className="text-gray-600">
+        Tìm kiếm bac sĩ theo các tiêu chí mong muốn.
+      </p>
 
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
         <button
@@ -56,7 +58,7 @@ const Doctors = () => {
           }`}
           onClick={() => setShowFilter((prev) => !prev)}
         >
-          Filters
+          Bộ lọc
         </button>
 
         <div
@@ -65,7 +67,7 @@ const Doctors = () => {
           }`}
         >
           {/* Search Bar */}
-          <p className="font-medium">Tìm kiếm theo tên Bác sĩ</p>
+          <p className="font-medium">Tìm kiếm theo tên bác sĩ</p>
           <div className=" mb-4">
             <input
               type="text"
@@ -79,83 +81,83 @@ const Doctors = () => {
           <p className="font-medium">Chuyên ngành</p>
           <p
             onClick={() =>
-              speciality === "General physician"
+              speciality === "Bác sĩ đa khoa"
                 ? navigate("/doctors")
-                : navigate("/doctors/General physician")
+                : navigate("/doctors/Bác sĩ đa khoa")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "General physician"
+              speciality === "Bác sĩ đa khoa" ? "bg-indigo-100 text-black" : ""
+            }`}
+          >
+            Bác sĩ đa khoa
+          </p>
+          <p
+            onClick={() =>
+              speciality === "Bác sĩ phụ khoa"
+                ? navigate("/doctors")
+                : navigate("/doctors/Bác sĩ phụ khoa")
+            }
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+              speciality === "Bác sĩ phụ khoa" ? "bg-indigo-100 text-black" : ""
+            }`}
+          >
+            Bác sĩ phụ khoa
+          </p>
+          <p
+            onClick={() =>
+              speciality === "Bác sĩ da liễu"
+                ? navigate("/doctors")
+                : navigate("/doctors/Bác sĩ da liễu")
+            }
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+              speciality === "Bác sĩ da liễu" ? "bg-indigo-100 text-black" : ""
+            }`}
+          >
+            Bác sĩ da liễu
+          </p>
+          <p
+            onClick={() =>
+              speciality === "Bác sĩ nhi khoa"
+                ? navigate("/doctors")
+                : navigate("/doctors/Bác sĩ nhi khoa")
+            }
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+              speciality === "Bác sĩ nhi khoa" ? "bg-indigo-100 text-black" : ""
+            }`}
+          >
+            Bác sĩ nhi khoa
+          </p>
+          <p
+            onClick={() =>
+              speciality === "Bác sĩ thần kinh"
+                ? navigate("/doctors")
+                : navigate("/doctors/Bác sĩ thần kinh")
+            }
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+              speciality === "Bác sĩ thần kinh"
                 ? "bg-indigo-100 text-black"
                 : ""
             }`}
           >
-            General physician
+            Bác sĩ thần kinh
           </p>
           <p
             onClick={() =>
-              speciality === "Gynecologist"
+              speciality === "Bác sĩ chuyên khoa nội"
                 ? navigate("/doctors")
-                : navigate("/doctors/Gynecologist")
+                : navigate("/doctors/Bác sĩ chuyên khoa nội")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Gynecologist" ? "bg-indigo-100 text-black" : ""
-            }`}
-          >
-            Gynecologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Dermatologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Dermatologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Dermatologist" ? "bg-indigo-100 text-black" : ""
-            }`}
-          >
-            Dermatologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Pediatricians"
-                ? navigate("/doctors")
-                : navigate("/doctors/Pediatricians")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""
-            }`}
-          >
-            Pediatricians
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Neurologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Neurologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Neurologist" ? "bg-indigo-100 text-black" : ""
-            }`}
-          >
-            Neurologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gastroenterologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gastroenterologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Gastroenterologist"
+              speciality === "Bác sĩ chuyên khoa nội"
                 ? "bg-indigo-100 text-black"
                 : ""
             }`}
           >
-            Gastroenterologist
+            Bác sĩ chuyên khoa nội
           </p>
 
           {/* Experience filter section */}
-          <p className="font-medium mt-4">Experience</p>
+          <p className="font-medium mt-4">Kinh Nghiệm</p>
           <div className="flex flex-col gap-2">
             <button
               onClick={() => toggleExperienceSort("asc")}
@@ -163,7 +165,7 @@ const Doctors = () => {
                 sortByExperience === "asc" ? "bg-indigo-100 text-black" : ""
               }`}
             >
-              Low to High
+              Thấp đến cao
             </button>
             <button
               onClick={() => toggleExperienceSort("desc")}
@@ -171,7 +173,7 @@ const Doctors = () => {
                 sortByExperience === "desc" ? "bg-indigo-100 text-black" : ""
               }`}
             >
-              High to Low
+              Cao xuống thấp
             </button>
           </div>
         </div>

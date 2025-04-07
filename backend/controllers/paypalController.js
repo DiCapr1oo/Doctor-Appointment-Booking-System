@@ -10,7 +10,7 @@ const createPayment = async (req, res) => {
     if (!appointment) {
       return res
         .status(404)
-        .json({ success: false, message: "Appointment not found" });
+        .json({ success: false, message: "Cuộc hẹn không có" });
     }
 
     const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();

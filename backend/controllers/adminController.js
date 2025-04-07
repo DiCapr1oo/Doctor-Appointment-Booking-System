@@ -48,14 +48,14 @@ const addDoctor = async (req, res) => {
       !fees ||
       !address
     ) {
-      return res.json({ success: false, message: "Missing Details" });
+      return res.json({ success: false, message: "Thiếu dữ liệu" });
     }
 
     //validating email format
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
-        message: "Please enter a valid email",
+        message: "Hãy nhập địa chỉ email hợp lệ",
       });
     }
 
@@ -63,7 +63,7 @@ const addDoctor = async (req, res) => {
     if (password.length < 8) {
       return res.json({
         success: false,
-        message: "Please enter strong password",
+        message: "Hãy nhập mật khẩu mạnh hơn",
       });
     }
 
@@ -94,7 +94,7 @@ const addDoctor = async (req, res) => {
     const newDoctor = new doctorModel(doctorData);
     await newDoctor.save();
 
-    res.json({ success: true, message: "Doctor Added" });
+    res.json({ success: true, message: "Thêm Bác Sĩ Thành Công" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -115,7 +115,7 @@ const loginAdmin = async (req, res) => {
     } else {
       res.json({
         success: false,
-        message: "Invalid credentials",
+        message: "Thông Tin Không Hợp Lệ",
       });
     }
   } catch (error) {
@@ -168,7 +168,7 @@ const appointmentCancel = async (req, res) => {
     );
 
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
-    res.json({ success: true, message: "Appointment Cancelled" });
+    res.json({ success: true, message: "Cuộc Hẹn Đã Bị Hủy" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });

@@ -81,7 +81,7 @@ const AddDoctor = () => {
 
   return (
     <form onSubmit={onSubmitHandler} className="m-5 w-full">
-      <p className="mb-3 text-lg font-medium">Add Doctor</p>
+      <p className="mb-3 text-lg font-medium">Thêm Bác Sĩ</p>
 
       <div className="bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
         <div className="flex items-center gap-4 mb-8 text-gray-500">
@@ -100,39 +100,39 @@ const AddDoctor = () => {
             hidden
           />
           <p>
-            Upload doctor <br />
-            picture
+            Tải hình ảnh <br />
+            của bác sĩ
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row items-start gap-10 text-gray-600">
           <div className="w-full lg:flex-1 flex flex-col gap-4">
             <div className="flex flex-col gap-1 flex-1">
-              <p>Doctor Name</p>
+              <p>Họ & Tên</p>
               <input
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 className="border rounded px-3 py-2"
                 type="text"
-                placeholder="Name"
+                placeholder="Full Name"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Doctor Email</p>
+              <p>Email</p>
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 className="border rounded px-3 py-2"
                 type="email"
-                placeholder="Email"
+                placeholder="example@gmail.com"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Doctor Password</p>
+              <p>Mật khẩu</p>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -144,7 +144,7 @@ const AddDoctor = () => {
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Experience</p>
+              <p>Kinh nghiệm</p>
               <select
                 onChange={(e) => setExperience(e.target.value)}
                 value={experience}
@@ -152,21 +152,21 @@ const AddDoctor = () => {
                 name=""
                 id=""
               >
-                <option value="1 Years">1 Year</option>
-                <option value="2 Years">2 Years</option>
-                <option value="3 Years">3 Years</option>
-                <option value="4 Years">4 Years</option>
-                <option value="5 Years">5 Years</option>
-                <option value="6 Years">6 Years</option>
-                <option value="7 Years">7 Years</option>
-                <option value="8 Years">8 Years</option>
-                <option value="9 Years">9 Years</option>
-                <option value="10 Years">10 Years</option>
+                <option value="1 Năm">1 Năm</option>
+                <option value="2 Năm">2 Năm</option>
+                <option value="3 Năm">3 Năm</option>
+                <option value="4 Năm">4 Năm</option>
+                <option value="5 Năm">5 Năm</option>
+                <option value="6 Năm">6 Năm</option>
+                <option value="7 Năm">7 Năm</option>
+                <option value="8 Năm">8 Năm</option>
+                <option value="9 Năm">9 Năm</option>
+                <option value="10 Năm">10 Năm</option>
               </select>
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Fees</p>
+              <p>Phí khám bệnh</p>
               <input
                 onChange={(e) => setFees(e.target.value)}
                 value={fees}
@@ -180,7 +180,7 @@ const AddDoctor = () => {
 
           <div className="w-full flex lg:flex-1 flex-col gap-4">
             <div className="flex flex-col gap-1 flex-1">
-              <p>Speciality</p>
+              <p>Chuyên ngành</p>
               <select
                 onChange={(e) => setSpeciality(e.target.value)}
                 value={speciality}
@@ -188,17 +188,19 @@ const AddDoctor = () => {
                 name=""
                 id=""
               >
-                <option value="General physician">General physician</option>
-                <option value="Gynecologist">Gynecologist</option>
-                <option value="Dermatologist">Dermatologist</option>
-                <option value="Pediatricians">Pediatricians</option>
-                <option value="Neurologist">Neurologist</option>
-                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="Bác sĩ đa khoa">Bác sĩ đa khoa</option>
+                <option value="Bác sĩ phụ khoa">Bác sĩ phụ khoa</option>
+                <option value="Bác sĩ da liễu">Bác sĩ da liễu</option>
+                <option value="Bác sĩ nhi khoa">Bác sĩ nhi khoa</option>
+                <option value="Bác sĩ thần kinh">Bác sĩ thần kinh</option>
+                <option value="Bác sĩ chuyên khoa nội">
+                  Bác sĩ chuyên khoa nội
+                </option>
               </select>
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Education</p>
+              <p>Học vấn</p>
               <input
                 onChange={(e) => setDegree(e.target.value)}
                 value={degree}
@@ -210,13 +212,13 @@ const AddDoctor = () => {
             </div>
 
             <div className="flex flex-col gap-1 flex-1">
-              <p>Address</p>
+              <p>Địa chỉ</p>
               <input
                 onChange={(e) => setAddress1(e.target.value)}
                 value={address1}
                 className="border rounded px-3 py-2"
                 type="text"
-                placeholder="Address 1"
+                placeholder="Địa chỉ 1"
                 required
               />
               <input
@@ -224,20 +226,20 @@ const AddDoctor = () => {
                 value={address2}
                 className="border rounded px-3 py-2"
                 type="text"
-                placeholder="Address 2"
+                placeholder="Địa chỉ 2"
                 required
               />
             </div>
           </div>
         </div>
         <div>
-          <p className="mt-4 mb-2">About Doctor</p>
+          <p className="mt-4 mb-2">Giới thiệu về bác sĩ</p>
           <textarea
             onChange={(e) => setAbout(e.target.value)}
             value={about}
             className="w-full px-4 pt2 border rounded"
             type="text"
-            placeholder="Write about doctor"
+            placeholder="Giới thiệu về bác sĩ"
             rows={5}
             required
           />
@@ -247,7 +249,7 @@ const AddDoctor = () => {
           type="submit"
           className="bg-primary px-10 py-3 mt-4 text-white rounded-full"
         >
-          Add Doctor
+          Thêm Bác Sĩ
         </button>
       </div>
     </form>

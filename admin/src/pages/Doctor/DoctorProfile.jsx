@@ -88,11 +88,8 @@ const DoctorProfile = () => {
         {/* Fees & Address */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-1">
-              Appointment fee
-            </h3>
+            <h3 className="text-sm font-medium text-gray-500 mb-1">Phí khám</h3>
             <div className="text-xl font-semibold text-gray-800">
-              {currency}
               {isEdit ? (
                 <input
                   className="ml-2 p-1 border rounded w-24"
@@ -108,11 +105,12 @@ const DoctorProfile = () => {
               ) : (
                 profileData.fees
               )}
+              {currency}
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-1">Address</h3>
+            <h3 className="text-sm font-medium text-gray-500 mb-1">Địa chỉ</h3>
             <div className="text-gray-800">
               {isEdit ? (
                 <>
@@ -168,7 +166,7 @@ const DoctorProfile = () => {
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
             <span className="ml-3 text-sm font-medium text-gray-700">
-              Available for appointments
+              Trạng thái nhận cuộc hẹn
             </span>
           </label>
         </div>
@@ -179,14 +177,14 @@ const DoctorProfile = () => {
             onClick={updateProfile}
             className="px-6 py-2 bg-primary text-white text-sm rounded-full mt-5 hover:bg-primary-dark transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
           >
-            Save Changes
+            Lưu Thay Đổi
           </button>
         ) : (
           <button
             onClick={() => setIsEdit(true)}
             className="px-6 py-2 border border-primary text-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
           >
-            Edit Profile
+            Chỉnh Sửa Hồ Sơ
           </button>
         )}
       </div>
