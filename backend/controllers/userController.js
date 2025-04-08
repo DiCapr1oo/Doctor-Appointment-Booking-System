@@ -69,7 +69,6 @@ const loginUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
-    s;
   }
 };
 
@@ -130,7 +129,10 @@ const bookAppointment = async (req, res) => {
     const docData = await doctorModel.findById(docId).select("-password");
 
     if (!docData.available) {
-      return res.json({ success: false, message: "Doctor not available" });
+      return res.json({
+        success: false,
+        message: "Bác Sĩ Tạm Thời Không Nhận Cuộc Hẹn",
+      });
     }
 
     let slots_booked = docData.slots_booked;
@@ -138,7 +140,10 @@ const bookAppointment = async (req, res) => {
     // checking for slot availability
     if (slots_booked[slotDate]) {
       if (slots_booked[slotDate].includes(slotTime)) {
-        return res.json({ success: false, message: "Doctor not available" });
+        return res.json({
+          success: false,
+          message: "Bác Sĩ Tạm Thời Không Nhận Cuộc Hẹn",
+        });
       } else {
         slots_booked[slotDate].push(slotTime);
       }
@@ -170,7 +175,7 @@ const bookAppointment = async (req, res) => {
     res.json({ success: true, message: "Cuộc Hẹn Đã Được Đặt " });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Booking Failed" });
+    res.json({ success: false, message: "Đặt Lịch Thất Bại" });
   }
 };
 //API to get user appointments for frontend my-appointments page

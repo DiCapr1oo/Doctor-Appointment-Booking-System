@@ -13,7 +13,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -86,17 +85,6 @@ const Login = () => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            required
-          />
-        </div>
-
-        <div className="w-full">
-          <p>Số điện thoại</p>
-          <input
-            className="border border-zinc-300 rounded w-full p-2 mt-1 focus:outline-none focus:border-primary"
-            type="email"
-            onChange={(e) => setPhone(e.target.value)}
-            value={phone}
             required
           />
         </div>

@@ -20,15 +20,16 @@ const DoctorAppointments = () => {
     }
   }, [dToken]);
   return (
-    <div className="w-full max-w-6xl m-5">
+    <div className="w-full max-w-7xl m-5">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
 
       <div className="bg-white border rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
-        <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b">
+        <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1.5fr_1.5fr_2.5fr_1fr_1fr] gap-1 py-3 px-6 border-b">
           <p>#</p>
           <p>Bệnh nhân</p>
-          <p>Thanh toán</p>
           <p>Tuổi</p>
+          <p>Số điện thoại</p>
+          <p>Thanh toán</p>
           <p>Thời gian</p>
           <p>Phí khám</p>
           <p className="text-center">Thao tác</p>
@@ -36,7 +37,7 @@ const DoctorAppointments = () => {
 
         {appointments.reverse().map((item, index) => (
           <div
-            className="flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50"
+            className="flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1.5fr_1.5fr_2.5fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50"
             key={index}
           >
             <p className="max-sm:hidden">{index + 1}</p>
@@ -48,12 +49,14 @@ const DoctorAppointments = () => {
               />
               <p>{item.userData.name}</p>
             </div>
+            <p className="max-sm:hidden">{calculateAge(item.userData.dob)}</p>
+            <p className="max-sm:hidden">{item.userData.phone}</p>
+
             <div>
               <p className="text-xs inline border border-primary px-2 rounded-full">
                 {item.payment ? "Online" : "Cash"}
               </p>
             </div>
-            <p className="max-sm:hidden">{calculateAge(item.userData.dob)}</p>
             <p>
               {slotDateFormat(item.slotDate)}, {item.slotTime}
             </p>

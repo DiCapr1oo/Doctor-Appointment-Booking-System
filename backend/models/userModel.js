@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   address: { type: Object, default: { line1: "", line2: "" } },
   gender: { type: String, default: "Not Selected" },
   dob: { type: String, default: "Not Selected" },
-  phone: { type: String, required: true },
+  phone: { type: String, default: "0000000000" },
 });
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);
 export default userModel;
