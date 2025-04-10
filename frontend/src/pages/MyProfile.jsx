@@ -200,6 +200,7 @@ const MyProfile = () => {
                 <input
                   className="w-full p-2 bg-gray-50 rounded border border-gray-200 focus:outline-none focus:border-primary"
                   type="date"
+                  max={new Date().toISOString().split("T")[0]}
                   onChange={(e) =>
                     setUserData((prev) => ({ ...prev, dob: e.target.value }))
                   }

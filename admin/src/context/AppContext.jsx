@@ -8,8 +8,13 @@ const AppContextProvider = (props) => {
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
+    if (isNaN(birthDate.getTime())) return ""; // Không hiển thị nếu ngày không hợp lệ
 
     let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
     return age;
   };
 
