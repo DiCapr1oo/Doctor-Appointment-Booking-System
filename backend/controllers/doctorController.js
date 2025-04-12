@@ -2,6 +2,7 @@ import doctorModel from "../models/doctorModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
+import pool from "../config/mysqlConfig.js";
 
 const changeAvailability = async (req, res) => {
   try {
@@ -168,6 +169,69 @@ const updateDoctorProfile = async (req, res) => {
   }
 };
 
+// API mới: generateStats (để thống kê số liệu và lưu vào MySQL)
+const generateStats = async (req, res) => {
+  try {
+    const { docId } = req.body;
+
+    // Lấy tất cả cuộc hẹn của bác sĩ
+    const appointments = await appointmentModel.find({ docId });
+
+    // Tính toán số liệu
+    let totalRevenue = 0;
+    let totalPatients = [];
+    let totalAppointments = appointments.length;
+    let cancelledAppointments = 0;
+    let completedAppointments = 0;
+
+    appointments.forEach((item) => {
+      // Doanh thu: Chỉ tính các cuộc hẹn đã hoàn thành hoặc đã thanh toán
+      if (item.isCompleted || item.payment) {
+        totalRevenue += item.amount;
+        completedAppointments += 1;
+      }
+      // Số buổi hẹn bị hủy
+      if (item.cancelled) {
+        cancelledAppointments += 1;
+      }
+      // Số bệnh nhân: Loại bỏ trùng lặp
+      if (!totalPatients.includes(item.userId)) {
+        totalPatients.push(item.userId);
+      }
+    });
+
+    const statsData = {
+      doctorId: docId,
+      totalRevenue: totalRevenue * 1000, // Nhân 1000 như trong báo cáo PDF
+      totalPatients: totalPatients.length,
+      totalAppointments,
+      cancelledAppointments,
+      completedAppointments,
+      reportDate: new Date().toISOString().split("T")[0], // Ngày hiện tại (YYYY-MM-DD)
+    };
+
+    // Lưu vào MySQL
+    await pool.query(
+      `INSERT INTO doctor_stats (doctor_id, total_revenue, total_patients, total_appointments, cancelled_appointments, completed_appointments, report_date)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        statsData.doctorId,
+        statsData.totalRevenue,
+        statsData.totalPatients,
+        statsData.totalAppointments,
+        statsData.cancelledAppointments,
+        statsData.completedAppointments,
+        statsData.reportDate,
+      ]
+    );
+
+    res.json({ success: true, statsData });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export {
   changeAvailability,
   doctorList,
@@ -178,4 +242,5 @@ export {
   doctorDashboard,
   doctorProfile,
   updateDoctorProfile,
+  generateStats,
 };

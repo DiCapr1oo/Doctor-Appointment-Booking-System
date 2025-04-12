@@ -1,12 +1,26 @@
+// backend/controllers/adminController.js
 import validator from "validator";
-import bcrypt, { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
 import userModel from "../models/userModel.js";
-///API for adding doctor
+import pool from "../config/mysqlConfig.js"; // Thêm import pool để kết nối MySQL
 
+// Hàm ghi log vào MySQL
+const logAdminAction = async (adminId, action, details) => {
+  try {
+    await pool.query(
+      "INSERT INTO admin_action_logs (admin_id, action, details) VALUES (?, ?, ?)",
+      [adminId, action, details]
+    );
+  } catch (error) {
+    console.error("Error logging admin action to MySQL:", error);
+  }
+};
+
+// API for adding doctor
 const addDoctor = async (req, res) => {
   try {
     const {
@@ -51,7 +65,7 @@ const addDoctor = async (req, res) => {
       return res.json({ success: false, message: "Thiếu dữ liệu" });
     }
 
-    //validating email format
+    // validating email format
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
@@ -59,7 +73,7 @@ const addDoctor = async (req, res) => {
       });
     }
 
-    //validating strong password
+    // validating strong password
     if (password.length < 8) {
       return res.json({
         success: false,
@@ -67,11 +81,11 @@ const addDoctor = async (req, res) => {
       });
     }
 
-    //hashing doctor password
+    // hashing doctor password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    //upload image to cloudinary
+    // upload image to cloudinary
     const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
       resource_type: "image",
     });
@@ -94,6 +108,14 @@ const addDoctor = async (req, res) => {
     const newDoctor = new doctorModel(doctorData);
     await newDoctor.save();
 
+    // Ghi log vào MySQL
+    const adminId = "admin"; // Giả sử adminId là "admin" (vì bạn dùng email/password cố định, không có adminId cụ thể)
+    await logAdminAction(
+      adminId,
+      "Thêm bác sĩ",
+      `Thêm bác sĩ với ID: ${newDoctor._id}`
+    );
+
     res.json({ success: true, message: "Thêm Bác Sĩ Thành Công" });
   } catch (error) {
     console.log(error);
@@ -101,7 +123,7 @@ const addDoctor = async (req, res) => {
   }
 };
 
-//API for admin login
+// API for admin login
 const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -128,6 +150,15 @@ const loginAdmin = async (req, res) => {
 const allDoctors = async (req, res) => {
   try {
     const doctors = await doctorModel.find({}).select("-password");
+
+    // Ghi log vào MySQL
+    const adminId = "admin";
+    await logAdminAction(
+      adminId,
+      "Xem danh sách bác sĩ",
+      "Xem toàn bộ danh sách bác sĩ"
+    );
+
     res.json({ success: true, doctors });
   } catch (error) {
     console.log(error);
@@ -135,10 +166,19 @@ const allDoctors = async (req, res) => {
   }
 };
 
-//API to get all appointments list
+// API to get all appointments list
 const appointmentsAdmin = async (req, res) => {
   try {
     const appointments = await appointmentModel.find({});
+
+    // Ghi log vào MySQL
+    const adminId = "admin";
+    await logAdminAction(
+      adminId,
+      "Xem danh sách lịch hẹn",
+      "Xem toàn bộ danh sách lịch hẹn"
+    );
+
     res.json({ success: true, appointments });
   } catch (error) {
     console.log(error);
@@ -146,7 +186,7 @@ const appointmentsAdmin = async (req, res) => {
   }
 };
 
-//API for appointment cancellation
+// API for appointment cancellation
 const appointmentCancel = async (req, res) => {
   try {
     const { appointmentId } = req.body;
@@ -156,7 +196,7 @@ const appointmentCancel = async (req, res) => {
       cancelled: true,
     });
 
-    //releasing doctor slot
+    // releasing doctor slot
     const { docId, slotDate, slotTime } = appointmentData;
 
     const doctorData = await doctorModel.findById(docId);
@@ -168,6 +208,15 @@ const appointmentCancel = async (req, res) => {
     );
 
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+    // Ghi log vào MySQL
+    const adminId = "admin";
+    await logAdminAction(
+      adminId,
+      "Hủy lịch hẹn",
+      `Hủy lịch hẹn với ID: ${appointmentId}`
+    );
+
     res.json({ success: true, message: "Cuộc Hẹn Đã Bị Hủy" });
   } catch (error) {
     console.log(error);
@@ -175,7 +224,7 @@ const appointmentCancel = async (req, res) => {
   }
 };
 
-//API to get dashboard data for admin panel
+// API to get dashboard data for admin panel
 const adminDashboard = async (req, res) => {
   try {
     const doctors = await doctorModel.find({});
@@ -188,6 +237,14 @@ const adminDashboard = async (req, res) => {
       appointments: appointments.length,
       latestAppointments: appointments.reverse().slice(0, 5),
     };
+
+    // Ghi log vào MySQL
+    const adminId = "admin";
+    await logAdminAction(
+      adminId,
+      "Xem dashboard",
+      "Xem dữ liệu dashboard admin"
+    );
 
     res.json({ success: true, dashData });
   } catch (error) {
