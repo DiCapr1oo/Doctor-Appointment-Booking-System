@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import Doctor from "../models/doctorModel.js";
 
-//Doctor authentication middleware
+// Doctor authentication middleware
 const authDoctor = async (req, res, next) => {
   try {
     const { dtoken } = req.headers;
@@ -12,7 +13,18 @@ const authDoctor = async (req, res, next) => {
     }
     const token_decode = jwt.verify(dtoken, process.env.JWT_SECRET);
 
-    req.body.docId = token_decode.id;
+    // Lấy thông tin doctor từ database
+    const doctor = await Doctor.findById(token_decode.id);
+    if (!doctor) {
+      return res.json({
+        success: false,
+        message: "Doctor not found",
+      });
+    }
+
+    req.user = doctor; // Thêm doctor vào req.user (thống nhất với authUser)
+    req.senderModel = "doctor"; // Thêm senderModel để chỉ ra đây là doctor (bác sĩ)
+    req.body.docId = token_decode.id; // Giữ nguyên dòng này nếu bạn vẫn cần docId trong req.body
 
     next();
   } catch (error) {

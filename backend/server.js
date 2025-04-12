@@ -24,7 +24,7 @@ app.use("/api/doctor", doctorRouter);
 app.use("/api/user", userRouter);
 app.use("/api/payment", paymentRouter);
 
-app.get("/", (reg, res) => {
+app.get("/", (req, res) => {
   res.send("API WORKING GOOD");
 });
 

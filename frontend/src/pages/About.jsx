@@ -6,7 +6,7 @@ function About() {
     <div>
       <div className="text-center text-2xl pt-10 text-gray-500">
         <p>
-          Về <span className="text-gray-700 font-medium">Chúng Tôi</span>
+          <span className="text-gray-700 font-medium">PRESCIPTO</span>
         </p>
       </div>
 
@@ -56,7 +56,7 @@ function About() {
           <p>Lịch hẹn hợp lý phù hợp với lối sống bận rộn của bạn.</p>
         </div>
         <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary transition-all duration-300 text-gray-600 cursor-pointer hover:text-white">
-          <b>SỰ TIỆN LỢI::</b>
+          <b>SỰ TIỆN LỢI:</b>
           <p>
             Tiếp cận mạng lưới các chuyên gia chăm sóc sức khỏe đáng tin cậy tại
             khu vực của bạn.

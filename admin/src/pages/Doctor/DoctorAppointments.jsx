@@ -21,7 +21,7 @@ const DoctorAppointments = () => {
   }, [dToken]);
   return (
     <div className="w-full max-w-7xl m-5">
-      <p className="mb-3 text-lg font-medium">All Appointments</p>
+      <p className="mb-3 text-lg font-medium">Danh Sách Cuộc Hẹn</p>
 
       <div className="bg-white border rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
         <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1.5fr_1.5fr_2.5fr_1fr_1fr] gap-1 py-3 px-6 border-b">
@@ -54,7 +54,7 @@ const DoctorAppointments = () => {
 
             <div>
               <p className="text-xs inline border border-primary px-2 rounded-full">
-                {item.payment ? "Online" : "Cash"}
+                {item.payment ? "Online" : "Tiền mặt"}
               </p>
             </div>
             <p>

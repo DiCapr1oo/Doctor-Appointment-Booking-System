@@ -8,11 +8,11 @@ const AppContextProvider = (props) => {
   const currencySymbol = " VNĐ ";
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [doctors, setDoctors] = useState([]);
-
   const [token, setToken] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token") : false
   );
   const [userData, setUserData] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getDoctorsData = async () => {
     try {
@@ -42,6 +42,8 @@ const AppContextProvider = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,6 +57,7 @@ const AppContextProvider = (props) => {
     userData,
     setUserData,
     loadUserProfileData,
+    isLoading,
   };
 
   useEffect(() => {
@@ -63,9 +66,11 @@ const AppContextProvider = (props) => {
 
   useEffect(() => {
     if (token) {
+      setIsLoading(true);
       loadUserProfileData();
     } else {
       setUserData(false);
+      setIsLoading(false);
     }
   }, [token]);
 

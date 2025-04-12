@@ -71,7 +71,7 @@ const login = () => {
           />
         </div>
         <button className="bg-primary w-full text-white py-2 rounded-md text-base mt-2">
-          Login
+          Đăng Nhập
         </button>
         {state === "Admin" ? (
           <p>

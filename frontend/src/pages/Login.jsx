@@ -104,7 +104,7 @@ const Login = () => {
           type="submit"
           className="bg-primary text-white w-full py-2 rounded-md text-base mt-2 hover:bg-primary-dark transition-colors"
         >
-          {formType === "signup" ? "Create Account" : "Login"}
+          {formType === "signup" ? "Đăng Ký Tài Khoản" : "Đăng Nhập"}
         </button>
 
         {formType === "signup" ? (

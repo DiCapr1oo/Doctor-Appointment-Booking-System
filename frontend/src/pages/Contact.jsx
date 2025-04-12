@@ -21,10 +21,12 @@ const Contact = () => {
         <div className="flex flex-col justify-center items-start gap-6">
           <p className="font-semibold text-lg text-gray-600">VĂN PHÒNG</p>
           <p className="text-gray-500">
-            00000 Willms Station <br /> Suite 000, Washington, USA
+            Tòa nhà ABC <br /> Số XYZ, Đường Cầu Giấy, Phường Dịch Vọng, TP Hà
+            Nội
           </p>
           <p className="text-gray-500">
-            Tel: (000) 000-0000 <br /> Email: d1capriooo-eaut@gmail.com
+            Số điện thoại: (000) 000-0000 <br /> Email:
+            d1capriooo-eaut@gmail.com
           </p>
           <p className="font-semibold text-lg text-gray-600">
             ĐĂNG KÝ LÀM BÁC SĨ

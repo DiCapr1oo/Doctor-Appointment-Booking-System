@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
 import pool from "../config/mysqlConfig.js";
+import mongoose from "mongoose"; // Thêm mongoose để sử dụng ObjectId
 
 const changeAvailability = async (req, res) => {
   try {
@@ -27,11 +28,9 @@ const doctorList = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
-    s;
   }
 };
 
-//API for doctor login
 const loginDoctor = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -58,7 +57,6 @@ const loginDoctor = async (req, res) => {
   }
 };
 
-//API to get doctor appointments for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
     const { docId } = req.body;
@@ -70,14 +68,25 @@ const appointmentsDoctor = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-//API to mark Cuộc Hẹn Đã Hoàn Thành for doctor panel
+
 const appointmentsCompleted = async (req, res) => {
   try {
     const { docId, appointmentId } = req.body;
 
+    // Kiểm tra dữ liệu đầu vào
+    if (!docId || !appointmentId) {
+      return res.json({
+        success: false,
+        message: "Thiếu docId hoặc appointmentId",
+      });
+    }
+
     const appointmentData = await appointmentModel.findById(appointmentId);
 
-    if (appointmentData && appointmentData.docId === docId) {
+    if (
+      appointmentData &&
+      appointmentData.docId.toString() === docId.toString()
+    ) {
       await appointmentModel.findByIdAndUpdate(appointmentId, {
         isCompleted: true,
       });
@@ -90,14 +99,24 @@ const appointmentsCompleted = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-///API to cancel appointment for doctor panel
+
 const appointmentsCancel = async (req, res) => {
   try {
     const { docId, appointmentId } = req.body;
 
-    const appointmentData = await appointmentModel.findById(appointmentId);
+    // Kiểm tra dữ liệu đầu vào
+    if (!docId || !appointmentId) {
+      return res.json({
+        success: false,
+        message: "Thiếu docId hoặc appointmentId",
+      });
+    }
 
-    if (appointmentData && appointmentData.docId === docId) {
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if (
+      appointmentData &&
+      appointmentData.docId.toString() === docId.toString()
+    ) {
       await appointmentModel.findByIdAndUpdate(appointmentId, {
         cancelled: true,
       });
@@ -110,7 +129,7 @@ const appointmentsCancel = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-//API to get dashboard data for doctor panel
+
 const doctorDashboard = async (req, res) => {
   try {
     const { docId } = req.body;
@@ -145,7 +164,6 @@ const doctorDashboard = async (req, res) => {
   }
 };
 
-//API to get doctor profile for doctor panel
 const doctorProfile = async (req, res) => {
   try {
     const { docId } = req.body;
@@ -156,7 +174,7 @@ const doctorProfile = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-//API to update doctor profile data from Doctor Panel
+
 const updateDoctorProfile = async (req, res) => {
   try {
     const { docId, fees, address, available } = req.body;
@@ -169,15 +187,12 @@ const updateDoctorProfile = async (req, res) => {
   }
 };
 
-// API mới: generateStats (để thống kê số liệu và lưu vào MySQL)
 const generateStats = async (req, res) => {
   try {
     const { docId } = req.body;
 
-    // Lấy tất cả cuộc hẹn của bác sĩ
     const appointments = await appointmentModel.find({ docId });
 
-    // Tính toán số liệu
     let totalRevenue = 0;
     let totalPatients = [];
     let totalAppointments = appointments.length;
@@ -185,16 +200,13 @@ const generateStats = async (req, res) => {
     let completedAppointments = 0;
 
     appointments.forEach((item) => {
-      // Doanh thu: Chỉ tính các cuộc hẹn đã hoàn thành hoặc đã thanh toán
       if (item.isCompleted || item.payment) {
         totalRevenue += item.amount;
         completedAppointments += 1;
       }
-      // Số buổi hẹn bị hủy
       if (item.cancelled) {
         cancelledAppointments += 1;
       }
-      // Số bệnh nhân: Loại bỏ trùng lặp
       if (!totalPatients.includes(item.userId)) {
         totalPatients.push(item.userId);
       }
@@ -202,15 +214,14 @@ const generateStats = async (req, res) => {
 
     const statsData = {
       doctorId: docId,
-      totalRevenue: totalRevenue * 1000, // Nhân 1000 như trong báo cáo PDF
+      totalRevenue: totalRevenue * 1000,
       totalPatients: totalPatients.length,
       totalAppointments,
       cancelledAppointments,
       completedAppointments,
-      reportDate: new Date().toISOString().split("T")[0], // Ngày hiện tại (YYYY-MM-DD)
+      reportDate: new Date().toISOString().split("T")[0],
     };
 
-    // Lưu vào MySQL
     await pool.query(
       `INSERT INTO doctor_stats (doctor_id, total_revenue, total_patients, total_appointments, cancelled_appointments, completed_appointments, report_date)
        VALUES (?, ?, ?, ?, ?, ?, ?)`,

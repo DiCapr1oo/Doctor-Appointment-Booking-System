@@ -32,7 +32,7 @@ const Sidebar = () => {
             to={"/all-appointment"}
           >
             <img src={assets.appointment_icon} alt="" />
-            <p className="hidden md:block">Các Cuộc Hẹn</p>
+            <p className="hidden md:block">Danh Sách Cuộc Hẹn</p>
           </NavLink>
 
           <NavLink
@@ -84,7 +84,19 @@ const Sidebar = () => {
             to={"/doctor-appointments"}
           >
             <img src={assets.appointment_icon} alt="" />
-            <p className="hidden md:block">Các Cuộc Hẹn</p>
+            <p className="hidden md:block">Danh Sách Cuộc Hẹn</p>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-3.5 md:px-9 md:min-w-72 cursor-pointer ${
+                isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""
+              }`
+            }
+            to={"/doctor-messages"} // Thêm mục Tin nhắn
+          >
+            <img src={assets.chat_icon} alt="" />{" "}
+            <p className="hidden md:block">Tin nhắn</p>
           </NavLink>
 
           <NavLink

@@ -5,14 +5,14 @@ import { AppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { token, setToken, userData, setUserData } = useContext(AppContext); // Thêm setUserData
+  const { token, setToken, userData, setUserData } = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
 
   const logout = () => {
-    setToken(null); // Đổi từ false sang null để rõ ràng hơn
-    setUserData(null); // Clear user data
+    setToken(null);
+    setUserData(null);
     localStorage.removeItem("token");
-    navigate("/"); // Redirect về trang chủ
+    navigate("/");
   };
 
   return (
@@ -43,33 +43,42 @@ const Navbar = () => {
       </ul>
       <div className="flex items-center gap-4">
         {token && userData ? (
-          <div className="flex items-center gap-2 cursor-pointer group relative">
-            {/* Avatar container với kích thước cố định */}
-            <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white">
-              <img
-                className="w-full h-full object-cover"
-                src={userData.image}
-                alt="User avatar"
-              />
-            </div>
-            <img className="w-2.5" src={assets.dropdown_icon} alt="" />
-            <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
-              <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
-                <p
-                  onClick={() => navigate("my-profile")}
-                  className="hover:text-black cursor-pointer"
-                >
-                  Hồ Sơ Cá Nhân
-                </p>
-                <p
-                  onClick={() => navigate("my-appointments")}
-                  className="hover:text-black cursor-pointer"
-                >
-                  Cuộc Hẹn Của Tôi
-                </p>
-                <p onClick={logout} className="hover:text-black cursor-pointer">
-                  Đăng Xuất
-                </p>
+          <div className="flex items-center gap-2">
+            {/* Icon Tin nhắn */}
+            <NavLink to="/messages" className="relative mr-5">
+              <img src={assets.chat_icon} alt="" />{" "}
+            </NavLink>
+            {/* Avatar container với dropdown */}
+            <div className="flex items-center gap-2 cursor-pointer group relative">
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white">
+                <img
+                  className="w-full h-full object-cover"
+                  src={userData.image}
+                  alt="User avatar"
+                />
+              </div>
+              <img className="w-2.5" src={assets.dropdown_icon} alt="" />
+              <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
+                <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
+                  <p
+                    onClick={() => navigate("my-profile")}
+                    className="hover:text-black cursor-pointer"
+                  >
+                    Hồ Sơ Cá Nhân
+                  </p>
+                  <p
+                    onClick={() => navigate("my-appointments")}
+                    className="hover:text-black cursor-pointer"
+                  >
+                    Cuộc Hẹn Của Tôi
+                  </p>
+                  <p
+                    onClick={logout}
+                    className="hover:text-black cursor-pointer"
+                  >
+                    Đăng Xuất
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -123,6 +132,12 @@ const Navbar = () => {
             <NavLink onClick={() => setShowMenu(false)} to="/contact">
               <p className="px-4 py-2 rounded inline-block">Liên Hệ</p>
             </NavLink>
+            {/* Thêm mục Tin nhắn vào menu mobile */}
+            {token && userData && (
+              <NavLink onClick={() => setShowMenu(false)} to="/messages">
+                <p className="px-4 py-2 rounded inline-block">Tin nhắn</p>
+              </NavLink>
+            )}
             <div className="flex flex-col gap-2 w-full mt-4">
               <button
                 onClick={() => {

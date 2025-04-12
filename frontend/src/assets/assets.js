@@ -9,6 +9,8 @@ import dropdown_icon from "./dropdown_icon.svg";
 import menu_icon from "./menu_icon.svg";
 import cross_icon from "./cross_icon.png";
 import chats_icon from "./chats_icon.svg";
+import chat_icon from "./chat_icon.svg";
+import add_image_icon from "./add_image_icon.svg";
 import verified_icon from "./verified_icon.svg";
 import arrow_icon from "./arrow_icon.svg";
 import info_icon from "./info_icon.svg";
@@ -43,6 +45,7 @@ export const assets = {
   group_profiles,
   logo,
   chats_icon,
+  chat_icon,
   verified_icon,
   info_icon,
   profile_pic,
@@ -55,6 +58,7 @@ export const assets = {
   upload_icon,
   stripe_logo,
   razorpay_logo,
+  add_image_icon,
 };
 
 export const specialityData = [
