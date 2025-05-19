@@ -22,9 +22,9 @@ const authUser = async (req, res, next) => {
       });
     }
 
-    req.user = user; // Thêm user vào req
-    req.senderModel = "user"; // Thêm senderModel để chỉ ra đây là user (bệnh nhân)
-    req.body.userId = token_decode.id; // Giữ nguyên dòng này nếu bạn vẫn cần userId trong req.body
+    req.user = user;
+    req.senderModel = "user";
+    req.body.userId = token_decode.id;
 
     next();
   } catch (error) {

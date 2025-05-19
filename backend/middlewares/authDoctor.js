@@ -22,9 +22,9 @@ const authDoctor = async (req, res, next) => {
       });
     }
 
-    req.user = doctor; // Thêm doctor vào req.user (thống nhất với authUser)
-    req.senderModel = "doctor"; // Thêm senderModel để chỉ ra đây là doctor (bác sĩ)
-    req.body.docId = token_decode.id; // Giữ nguyên dòng này nếu bạn vẫn cần docId trong req.body
+    req.user = doctor;
+    req.senderModel = "doctor";
+    req.body.docId = token_decode.id;
 
     next();
   } catch (error) {

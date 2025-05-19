@@ -30,7 +30,6 @@ const getConversationsForUser = async (req, res) => {
       .json({ success: false, message: "Error fetching conversations", error });
   }
 };
-
 const getConversationsForDoctor = async (req, res) => {
   try {
     const doctorId = req.user._id;
@@ -115,7 +114,6 @@ const sendMessage = async (req, res) => {
       .json({ success: false, message: "Error sending message", error });
   }
 };
-
 const getMessages = async (req, res) => {
   const { conversationId } = req.params;
 

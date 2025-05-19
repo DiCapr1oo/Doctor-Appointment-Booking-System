@@ -20,10 +20,6 @@ const appointmentSchema = new mongoose.Schema({
   cancelled: { type: Boolean, default: false },
   payment: { type: Boolean, default: false },
   isCompleted: { type: Boolean, default: false },
-  isCounted: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const appointmentModel =
